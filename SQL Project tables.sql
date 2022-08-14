@@ -13,9 +13,11 @@ create table customer(
 
 create table dealership(
 	dealership_id SERIAL primary key,
+	name VARCHAR(50),
 	address VARCHAR(50),
 	state VARCHAR(2),
 	zipcode VARCHAR(5),
+	email VARCHAR(50)
 	main_phone VARCHAR(20),
 	sales_phone VARCHAR(20),
 	service_phone VARCHAR(20)
@@ -23,12 +25,14 @@ create table dealership(
 
 create table car(
 	car_id SERIAL primary key,
-	vin_num INTEGER,
-	make VARCHAR(10),
+	vin_num VARCHAR(17),
+	make VARCHAR(15),
 	model VARCHAR(20),
 	year INTEGER,
 	color VARCHAR(10),
 	price NUMERIC(8,2),
+	used BOOLEAN,
+	owned BOOLEAN,
 	customer_id INTEGER,
 	foreign key(customer_id) references customer(customer_id),
 	dealership_id INTEGER,
@@ -65,9 +69,11 @@ create table service(
 
 create table parts(
 	parts_id SERIAL primary key,
-	supplier_id INTEGER,
+	name VARCHAR(50),
+	description VARCHAR(250),	
 	price NUMERIC(6,2),
-	service_id INTEGER,
+	supplier VARCHAR(50),
+	supplier_id INTEGER,
 	foreign key(service_id) references service(service_id)
 );
 
