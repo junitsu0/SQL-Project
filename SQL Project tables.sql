@@ -6,14 +6,19 @@ create table customer(
 	last_name VARCHAR(25),
 	address VARCHAR(50),
 	state VARCHAR(2),
-	phone INTEGER,
-	email VARCHAR(50)
+	phone VARCHAR(20),
+	email VARCHAR(50),
+	service_plan BOOLEAN
 );
 
 create table dealership(
-	dealership SERIAL primary key,
+	dealership_id SERIAL primary key,
 	address VARCHAR(50),
-	phone INTEGER
+	state VARCHAR(2),
+	zipcode VARCHAR(5),
+	main_phone VARCHAR(20),
+	sales_phone VARCHAR(20),
+	service_phone VARCHAR(20)
 );
 
 create table car(
@@ -23,6 +28,7 @@ create table car(
 	model VARCHAR(20),
 	year INTEGER,
 	color VARCHAR(10),
+	price NUMERIC(8,2),
 	customer_id INTEGER,
 	foreign key(customer_id) references customer(customer_id),
 	dealership_id INTEGER,
@@ -35,9 +41,10 @@ create table sales(
 	last_name VARCHAR(25),
 	address VARCHAR(50),
 	state VARCHAR(2),
-	phone INTEGER,
+	zipcode VARCHAR(5),
+	phone VARCHAR(20),
 	email VARCHAR(50),
-	job VARCHAR(20)
+	job VARCHAR(20),
 	dealership_id INTEGER,
 	foreign key(dealership_id) references dealership(dealership_id)
 );
@@ -48,16 +55,25 @@ create table service(
 	last_name VARCHAR(25),
 	address VARCHAR(50),
 	state VARCHAR(2),
-	phone INTEGER,
+	zipcode VARCHAR(5),
+	phone VARCHAR(20),
 	email VARCHAR(50),
 	job VARCHAR(20),
 	dealership_id INTEGER,
 	foreign key(dealership_id) references dealership(dealership_id)
 );
 
+create table parts(
+	parts_id SERIAL primary key,
+	supplier_id INTEGER,
+	price NUMERIC(6,2),
+	service_id INTEGER,
+	foreign key(service_id) references service(service_id)
+);
+
 create table invoice(
 	invoice_id SERIAL primary key,
-	date DATETIME,
+	date TIMESTAMP,
 	amount NUMERIC(8,2),
 	sales_id INTEGER,
 	foreign key(sales_id) references sales(sales_id),
@@ -69,9 +85,9 @@ create table invoice(
 
 create table ticket(
 	ticket_id SERIAL primary key,
-	date DATETIME,
+	date TIMESTAMP,
 	amount NUMERIC(8,2),
-	description VARCHAR(250)
+	description VARCHAR(250),
 	service_id INTEGER,
 	foreign key(service_id) references service(service_id),
 	car_id INTEGER,
