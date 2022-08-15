@@ -1,4 +1,6 @@
--- Tables
+--========--
+-- Tables --
+--========--
 
 create table customer(
 	customer_id SERIAL primary key,
@@ -6,6 +8,7 @@ create table customer(
 	last_name VARCHAR(25),
 	address VARCHAR(50),
 	state VARCHAR(2),
+	zipcode VARCHAR(5),
 	phone VARCHAR(20),
 	email VARCHAR(50),
 	service_plan BOOLEAN
@@ -17,7 +20,7 @@ create table dealership(
 	address VARCHAR(50),
 	state VARCHAR(2),
 	zipcode VARCHAR(5),
-	email VARCHAR(50)
+	email VARCHAR(50),
 	main_phone VARCHAR(20),
 	sales_phone VARCHAR(20),
 	service_phone VARCHAR(20)
@@ -73,13 +76,13 @@ create table parts(
 	description VARCHAR(250),	
 	price NUMERIC(6,2),
 	supplier VARCHAR(50),
-	supplier_id INTEGER,
+	service_id INTEGER,
 	foreign key(service_id) references service(service_id)
 );
 
 create table invoice(
 	invoice_id SERIAL primary key,
-	date TIMESTAMP,
+	invoice_date DATE,
 	amount NUMERIC(8,2),
 	sales_id INTEGER,
 	foreign key(sales_id) references sales(sales_id),
@@ -91,7 +94,7 @@ create table invoice(
 
 create table ticket(
 	ticket_id SERIAL primary key,
-	date TIMESTAMP,
+	ticket_date DATE,
 	amount NUMERIC(8,2),
 	description VARCHAR(250),
 	service_id INTEGER,

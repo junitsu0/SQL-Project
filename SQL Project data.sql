@@ -1,32 +1,32 @@
---====================--
--- Inserts Start Data --
---====================--
+--=========--
+-- Inserts --
+--=========--
 
 insert into customer(
 	first_name,
 	last_name,
 	address,
-	phone,
 	state,
 	zipcode,
+	phone,
 	email,
 	service_plan
 ) values (
 	'Brenda',
 	'Walsh',
 	'808 Circle Court',
-	'555-555-4973',
 	'CA',
 	'90210',
+	'555-555-4973',
 	'bwalsh@yahoo.com',
 	true
 ),(
 	'Andrea',
 	'Zuckerman',
 	'1540 Candy Castle Lane',
-	'555-555-7586',
 	'CA',
 	'90210',
+	'555-555-7586',
 	'azucker@hotmail.com',
 	true
 );
@@ -35,27 +35,27 @@ insert into service(
 	first_name,
 	last_name,
 	address,
-	phone,
 	state,
 	zipcode,
+	phone,
 	email,
 	job
 ) values (
 	'Steve',
 	'Sanders',
 	'628 Boring Court',
-	'555-555-9581',
 	'CA',
 	'90210',
+	'555-555-9581',
 	'ssanders@yahoo.com',
 	'general mechanic'
 ),(
 	'Brandon',
 	'Walsh',
 	'1652 Haviture Way',
-	'555-555-7586',
 	'CA',
 	'90210',
+	'555-555-7586',
 	'brwalsh@hotmail.com',
 	'auto body mechanic'
 );
@@ -64,27 +64,27 @@ insert into sales(
 	first_name,
 	last_name,
 	address,
-	phone,
 	state,
 	zipcode,
+	phone,
 	email,
 	job
 ) values (
 	'Dylan',
 	'McKay',
 	'628 Boring Court',
-	'555-555-9581',
 	'CA',
 	'90210',
+	'555-555-9581',
 	'dmckay@yahoo.com',
 	'sales associate'
 ),(
 	'David',
 	'Silver',
 	'1652 Haviture Way',
-	'555-555-7586',
 	'CA',
 	'90210',
+	'555-555-7586',
 	'dsilver@hotmail.com',
 	'sales associate'
 );
@@ -142,17 +142,17 @@ insert into parts(
 	name,
 	description,
 	price,
-	supplier,
+	supplier
 ) values (
 	'Battery',
 	'Powers the vehicle and, more importantly, your air conditioning',
 	59.99,
-	'Panasonic',
+	'Panasonic'
 ),(
 	'Brake Pad',
 	'Helps you to not run into things that you do not want to run into',
 	25.30,
-	'Ceco Friction Products',
+	'Ceco Friction Products'
 );
 
 
@@ -178,6 +178,7 @@ begin
 	last_name,
 	address,
 	state,
+	zipcode,
 	phone,
 	email,
 	service_plan)
@@ -186,6 +187,7 @@ begin
 	last_name,
 	address,
 	state,
+	zipcode,
 	phone,
 	email,
 	service_plan
@@ -300,7 +302,7 @@ create procedure add_part(
 	description VARCHAR(250),
 	price NUMERIC(6,2),
 	supplier VARCHAR(50))
-language plpqsql
+language plpgsql
 as $$
 begin
 	insert into parts(
@@ -317,17 +319,17 @@ begin
 end
 $$
 
---=================--
--- Call Procedures --
---=================--
+--=====================--
+-- Call Add Procedures --
+--=====================--
 
 call add_customer(
 	'Kelly',
 	'Taylor' ,
-	'444 Rectangle Lane',
-	'555-555-6242',
+	'2130 Rectangle Drive',
 	'CA',
 	'90210',
+	'555-555-6242',
 	'ktaylor@gmail.com',
 	false);
 
@@ -335,9 +337,9 @@ call add_service(
 	'Donna',
 	'Martin',
 	'444 Memory Lane',
-	'555-555-3354',
 	'CA',
 	'90210',
+	'555-555-3354',
 	'dmartin@gmail.com',
 	'brake technician');
 
@@ -345,9 +347,9 @@ call add_sales(
 	'Emily',
 	'Valentine',
 	'623 Gravy Train Lane',
-	'555-555-7820',
 	'CA',
 	'90210',
+	'555-555-7820',
 	'eval@wait.com',
 	'sales manager');
 
@@ -366,4 +368,15 @@ call add_part(
 	'Used to avoid suddenly appearing and/or slow moving pedestrians',
 	64.49,
 	'Whitecap Industries');
-	
+
+--===========--
+-- Functions --
+--===========--
+--check model inventory
+
+--==========--
+-- Triggers --
+--==========--
+
+select *
+from customer;
